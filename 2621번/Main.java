@@ -44,14 +44,18 @@ public class Main {
 
         int r=0,g=0,b=0,y=0; //색의 갯수
         int[]cnt = new int[10];
-        int shape_max=0,shape_min=5,number_max=0,number_min=5; //최소 최대 구하기
-        
+        int shape_max=0,shape_min=5,number_max=0,number_min=5; //최소 최대 구하기 (갯수)
+        int max_number; // 최대 숫자값
         for(int i = 0 ; i < 5 ; i++){  // 문양과 숫자 입력 및 개수 분류 와 최소 최대
                 shape[i] = scanner.next();
                 number[i] = scanner.nextInt();
                 cnt[number[i]]++;
-                if(number_max<number[i]) number_max = number[i];
-                if(number_min>number[i] && number[i]!=0)number_min = number[i];
+                if(number_max<cnt[number[i]])
+                {       
+                         max_number = number[i];
+                         number_max = cnt[number[i]];
+                }
+                if(number_min>cnt[number[i]] && cnt[number[i]]!=0)number_min = cnt[number[i]];
                 switch(shape[i]){
                         case "B":
                                 b++;
@@ -77,11 +81,52 @@ public class Main {
                 }
 
         }
-        
-     
-        
+        boolean isContiue = false;
 
+        if(number_min ==1 && number_max ==1)
+        for(int i = 1 ; i< 6 ; i++) //연속적인수 인지 확인
+        {
+                if(cnt[i]==cnt[i+1] && 
+                 cnt[i+1]==cnt[i+2] && 
+                 cnt[i+2]==cnt[i+3] && 
+                 cnt[i+3]==cnt[i+4] &&
+                 cnt [i+4]==1
+                 )isContiue=true;
+                
+        }
+        if(shape_max==5 &&isContiue) //모양이 같고 연속적인 숫자일때
+        {
 
+        }
+        else if (number_max == 4) //숫자가 4개가 같을 때
+        {
+        
+        }
+        else if(number_max == 3 && number_min==2) // 숫자 3개가 같고 나머지 2개가 같을때
+        {
+
+        }
+        else if(shape_max == 5)//모양이 5개가 같을때
+        {
+
+        }
+        else if(isContiue)//숫자가 연속적일때
+        {
+
+        }
+        else if(number_max == 3)//3장의 숫자가 같을때
+        {
+
+        }
+        else if(number_max==2)
+        {
+                if() // 2장씩 같은개 2개일 때
+                else // 1개 일때
+
+        }
+        else {
+
+        }
 
 }
     }
