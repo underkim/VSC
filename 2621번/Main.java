@@ -45,7 +45,7 @@ public class Main {
         int r=0,g=0,b=0,y=0; //색의 갯수
         int[]cnt = new int[10];
         int shape_max=0,shape_min=5,number_max=0,number_min=5; //최소 최대 구하기 (갯수)
-        int max_number; // 최대 숫자값
+        int max_number=0; // 최대 숫자값
         for(int i = 0 ; i < 5 ; i++){  // 문양과 숫자 입력 및 개수 분류 와 최소 최대
                 shape[i] = scanner.next();
                 number[i] = scanner.nextInt();
@@ -55,6 +55,9 @@ public class Main {
                          max_number = number[i];
                          number_max = cnt[number[i]];
                 }
+                else if(cnt[number[i]]!=0&&number_max==cnt[number[i]])
+                       max_number=(max_number<number[i])?number[i]:max_number;
+
                 if(number_min>cnt[number[i]] && cnt[number[i]]!=0)number_min = cnt[number[i]];
                 switch(shape[i]){
                         case "B":
@@ -82,7 +85,7 @@ public class Main {
 
         }
         boolean isContiue = false;
-
+        
         if(number_min ==1 && number_max ==1)
         for(int i = 1 ; i< 6 ; i++) //연속적인수 인지 확인
         {
@@ -94,39 +97,75 @@ public class Main {
                  )isContiue=true;
                 
         }
-        if(shape_max==5 &&isContiue) //모양이 같고 연속적인 숫자일때
+        boolean twice = false;  
+        int ck =0;//두번 검증 도구
+        int[] twice_number = new int [2]; // 숫자 저장
+        for(int a :cnt){
+                if(a==2){
+                        twice_number[ck]=cnt[a];
+                        ck++;
+                        
+                        }
+        }
+        if(ck == 2 ) twice=true; // 2인 숫자가 두개일때 
+
+        int res ;
+        // max_number= 가장큰수;
+        int same_max=0;
+        int same_min=0;
+        for(int i =1;i<10;i++)
+        {                       //숫자가 같을때 수
+                if(number_max==cnt[i]){
+                        same_max = i;
+                }
+                if(number_min==cnt[i]){
+                        same_min = i;
+                }
+        }
+        if(shape_max==5 &&isContiue) //모양이 같고 연속적인 숫자일때 가장 높은 숫자에 900을 더한다.
         {
+                res = 900+ max_number ;
+        }
+        else if (number_max == 4) //숫자가 4개가 같을 때 같은 숫자에 800을 더한다.
+        {
+                res = 800 + same_max;
+        }
+        else if(number_max == 3 && number_min==2) // 숫자 3개가 같고 나머지 2개가 같을때 점수는 3장이 같은 숫자에 10을 곱하고
+                                                        //2장이 같은 숫자를 더한 다음 700을 더한다. 
+        {
+                res = same_max*10 +same_min + 700;
+        }
+        else if(shape_max == 5)//모양이 5개가 같을때 점수는 가장 높은 숫자에 600을 더한다.
+        {
+                res = max_number + 600;
+        }
+        else if(isContiue)//숫자가 연속적일때 가장 높은 숫자에 500을 더한다. 
+        {
+                res = max_number +500;
+        }
+        else if(number_max == 3)//3장의 숫자가 같을때 점수는 같은 숫자에 400을 더한다. 
+        {
+               res =  max_number + 400;
+        }
+        else if(number_max==2) //
+        {
+                if(twice) // 2장의 숫자가 같고 또 다른 2장의 숫자가 같을 때 점수는 같은 숫자 중 큰 숫자에 10을 곱하고 
+                                //같은 숫자 중 작은 숫자를 더한 다음 300을 더한다.
+                {
+                       res =  twice_number[1]*10 + twice_number[0]+300;
+                }
+                else//2장의 숫자가 같을 때 점수는 같은 숫자에 200을 더한다.  
+                {
+                        res = max_number + 200;
+                }
 
         }
-        else if (number_max == 4) //숫자가 4개가 같을 때
-        {
-        
+        else // 아무것도 아닐 때 가장 큰 숫자에 100을 더한다.
+        {       
+                res = max_number +100;
         }
-        else if(number_max == 3 && number_min==2) // 숫자 3개가 같고 나머지 2개가 같을때
-        {
 
-        }
-        else if(shape_max == 5)//모양이 5개가 같을때
-        {
-
-        }
-        else if(isContiue)//숫자가 연속적일때
-        {
-
-        }
-        else if(number_max == 3)//3장의 숫자가 같을때
-        {
-
-        }
-        else if(number_max==2)
-        {
-                if() // 2장씩 같은개 2개일 때
-                else // 1개 일때
-
-        }
-        else {
-
-        }
+        System.out.println(res);
 
 }
     }
