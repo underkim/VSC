@@ -86,23 +86,24 @@ public class Main {
         }
         boolean isContiue = false;
         
-        if(number_min ==1 && number_max ==1)
+        
         for(int i = 1 ; i< 6 ; i++) //연속적인수 인지 확인
         {
+               
                 if(cnt[i]==cnt[i+1] && 
                  cnt[i+1]==cnt[i+2] && 
                  cnt[i+2]==cnt[i+3] && 
                  cnt[i+3]==cnt[i+4] &&
-                 cnt [i+4]==1
+                 cnt[i+4]==1
                  )isContiue=true;
                 
         }
         boolean twice = false;  
         int ck =0;//두번 검증 도구
         int[] twice_number = new int [2]; // 숫자 저장
-        for(int a :cnt){
-                if(a==2){
-                        twice_number[ck]=cnt[a];
+        for(int a =1;a<10 ;a++){
+                if(cnt[a]==2){
+                        twice_number[ck]=a;
                         ck++;
                         
                         }
