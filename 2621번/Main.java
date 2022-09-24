@@ -44,7 +44,7 @@ public class Main {
 
         int r=0,g=0,b=0,y=0; //색의 갯수
         int[]cnt = new int[10];
-        int shape_max=0,shape_min=5,number_max=0,number_min=5; //최소 최대 구하기 (갯수)
+        int shape_max=0,number_max=0,number_min=5; //최소 최대 구하기 (갯수)
         int max_number=0; // 최대 숫자값
         for(int i = 0 ; i < 5 ; i++){  // 문양과 숫자 입력 및 개수 분류 와 최소 최대
                 shape[i] = scanner.next();
@@ -58,27 +58,27 @@ public class Main {
                 else if(cnt[number[i]]!=0&&number_max==cnt[number[i]])
                        max_number=(max_number<number[i])?number[i]:max_number;
 
-                if(number_min>cnt[number[i]] && cnt[number[i]]!=0)number_min = cnt[number[i]];
+                
                 switch(shape[i]){
                         case "B":
                                 b++;
-                                if(0<b && shape_min>b) shape_min = b;
+                        
                                 if(shape_max < b )shape_max = b;
                                 break;
                         
                         case "Y":
                                 y++;
-                                if(0<y && shape_min>y) shape_min = y;
+                               
                                 if(shape_max < y )shape_max = y;
                                 break;
                         case "R":
                                 r++;
-                                if(0<r && shape_min>r) shape_min = r;
+                                
                                 if(shape_max <r )shape_max = r;
                                 break;
                         case "G":
                                 g++;
-                                if(0<g && shape_min>g) shape_min = g;
+                               
                                 if(shape_max < g )shape_max = g;
                                 break;
                 }
@@ -113,6 +113,9 @@ public class Main {
         // max_number= 가장큰수;
         int same_max=0;
         int same_min=0;
+        for(int i = 0 ; i < 5 ; i++){
+                if(number_min>cnt[number[i]] && cnt[number[i]]!=0)number_min = cnt[number[i]];
+        }
         for(int i =1;i<10;i++)
         {                       //숫자가 같을때 수
                 if(number_max==cnt[i]){
@@ -121,7 +124,9 @@ public class Main {
                 if(number_min==cnt[i]){
                         same_min = i;
                 }
+               
         }
+       
         if(shape_max==5 &&isContiue) //모양이 같고 연속적인 숫자일때 가장 높은 숫자에 900을 더한다.
         {
                 res = 900+ max_number ;
