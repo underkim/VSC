@@ -13,14 +13,13 @@ public class M11724 {
 			int x = scanner.nextInt()-1;
 			int y= scanner.nextInt()-1;
 			arr[x][y] = true;								//  ex)    	1  		2 	 3 
-			arr[y][x] = true;								//		 1 true	false  false
-										//		 2 false true  false
+															//		 1 true	false  false
+															//		 2 false true  false
 		}													// 		 3 false false true
 		
 		
 		for(int i = 0 ; i < n ; i++) 
 		{
-			arr[i][i]=  true;	
 			
 			for(int j = 0;j <n;	j++) 
 			{
