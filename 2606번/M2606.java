@@ -1,7 +1,8 @@
 import java.util.*;
 public class M2606 {
-    static int dfscount;
+         static int dfscount;
 
+    
 		public static void main(String[] args) {
 
 			Scanner scanner = new Scanner(System.in);
@@ -18,16 +19,15 @@ public class M2606 {
 												
 		}
 		
-		int cnt = 0;
-		for(int i=0;i<n;i++)
-		{ 	
-			if(!chk[i]){
-			dfs(arr,i,chk);
-			cnt++;
-		}
+		
 
-		}
-		System.out.println(cnt);
+		 dfscount = -1;
+			
+			dfs(arr,1,chk);
+			
+       
+		
+		System.out.println(dfscount);
     }
 		
 		
@@ -35,6 +35,8 @@ public class M2606 {
 	public static void dfs (boolean [][] arr , int x , boolean[] chk)
 	{
 		chk[x]=true;
+
+        dfscount++;
 		for(int i = 0 ; i < chk.length;i++)
 		{
 			if(!chk[i]&&arr[x][i])
