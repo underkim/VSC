@@ -23,7 +23,7 @@ public class M2606 {
 
 		 dfscount = -1;
 			
-			dfs(arr,1,chk);
+			dfs(arr,0,chk);
 			
        
 		
@@ -35,7 +35,6 @@ public class M2606 {
 	public static void dfs (boolean [][] arr , int x , boolean[] chk)
 	{
 		chk[x]=true;
-
         dfscount++;
 		for(int i = 0 ; i < chk.length;i++)
 		{
