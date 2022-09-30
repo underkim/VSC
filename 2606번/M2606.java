@@ -1,3 +1,4 @@
+import java.util.*;
 public class M2606 {
     static int dfscount;
 
@@ -27,5 +28,21 @@ public class M2606 {
 
 		}
 		System.out.println(cnt);
+    }
+		
+		
+	
+	public static void dfs (boolean [][] arr , int x , boolean[] chk)
+	{
+		chk[x]=true;
+		for(int i = 0 ; i < chk.length;i++)
+		{
+			if(!chk[i]&&arr[x][i])
+			{	
+				dfs(arr,i,chk);
+				
+			}
+		}
+	}
     
 }
