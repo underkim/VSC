@@ -1,12 +1,75 @@
 import java.util.*;
-// 상근이는 어렸을 적에 "봄보니 (Bomboni)" 게임을 즐겨했다.
-
-// 가장 처음에 N×N크기에 사탕을 채워 놓는다. 사탕의 색은 모두 같지 않을 수도 있다. 상근이는 사탕의 색이 다른 인접한 두 칸을 고른다. 그 다음 고른 칸에 들어있는 사탕을 서로 교환한다. 이제, 모두 같은 색으로 이루어져 있는 가장 긴 연속 부분(행 또는 열)을 고른 다음 그 사탕을 모두 먹는다.
-
-// 사탕이 채워진 상태가 주어졌을 때, 상근이가 먹을 수 있는 사탕의 최대 개수를 구하는 프로그램을 작성하시오.
-
 
 public class Main {
-    
+
+  static int max = 0;
+
+  static void rs(char[][] arr, int y, int x) {
+
+    char tmp = arr[y][x];
+    arr[y][x] = arr[y][x + 1];
+    arr[y][x + 1] = tmp;
+  }
+
+  static void cs(char[][] arr, int y, int x) {
+    char tmp = arr[y][x];
+    arr[y][x] = arr[y + 1][x];
+    arr[y + 1][x] = tmp;
+  }
+
+  static void rc(char[][] arr, int y) {
+    int cnt = 1;
+    for (int i = 0; i < arr[0].length - 1; i++) {
+      if (arr[y][i] == arr[y][i + 1]) {
+        cnt++;
+        if (max < cnt)
+          max = cnt;
+      } else
+        cnt = 1;
+    }
+  }
+
+  static void cc(char[][] arr, int x) {
+    int cnt = 1;
+    for (int i = 0; i < arr[0].length - 1; i++) {
+      if (arr[i][x] == arr[i + 1][x]) {
+        cnt++;
+        if (max < cnt)
+          max = cnt;
+      } else
+        cnt = 1;
+    }
+  }
+
+  public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
+
+    int N = scanner.nextInt();
+
+    scanner.nextLine();
+    char[][] arr = new char[N][];
+
+    for (int i = 0; i < N; i++) {
+
+      arr[i] = scanner.nextLine().toCharArray();
+    }
+
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < (N - 1); j++) {
+        rs(arr, i, j);
+        rc(arr, i);
+        cc(arr, j);
+        cc(arr, j + 1);
+        rs(arr, i, j);
+
+        cs(arr, j, i);
+        rc(arr, j);
+        rc(arr, j + 1);
+        cc(arr, i);
+        cs(arr, j, i);
+      }
+    }
+    System.out.println(max);
+
+  }
 }
