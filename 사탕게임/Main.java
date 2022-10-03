@@ -8,5 +8,5 @@ import java.util.*;
 
 public class Main {
     
-    Scanner scanner =
+    Scanner scanner = new Scanner(System.in);
 }
