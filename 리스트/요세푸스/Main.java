@@ -15,21 +15,36 @@ public class Main {
     {
         Scanner s = new Scanner(System.in);
 
-        ArrayList<Integer> al = new ArrayList<>();
-        ArrayList<Integer> res =new ArrayList<>();
-        int N = s.nextInt();
-        int X = s.nextInt();
-        for(int i = 1 ; i<=N;i++)
-        al.add(i);
+        int n=s.nextInt();
+        int k=s.nextInt();
 
-        
-        for(int i = 1 ; i <=N;i++){
-       
+        int index = k-1;
+        int cnt = k;
+        boolean chk[] = new boolean[n];
+        int arr[] = new int [n];
+        int i=0;
+        while(true)
+        {
+            if(chk[index])cnt--;  //만약 이미 사용했으면 카운팅 --
 
-    }
-
-        for(int i= 1; i<= N ; i++)
-        System.out.print(res.remove(i));
+            if(cnt == k)   // k만큼 이동했으면 그 위치를 표시후 저장후 카운팅 초기화
+            {
+                arr[i++] =index+1; // index가 0 시작이니까 1부터로 변경
+                chk[index]= true;  // 확인 체크
+                cnt = 0;            //카운팅 초기화
+                
+            }
+            if(i==n)break;
+            index = (index+1)%n;    //인덱스 1증가
+            cnt++;                  //카운팅
+            
+        }
+        System.out.print("<");
+        for(i =0;i<n-1;i++)
+        {
+            System.out.print(arr[i]+", ");
+        }
+        System.out.print(arr[n-1]+">");
     }
 }
 
