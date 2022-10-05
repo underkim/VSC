@@ -20,12 +20,43 @@ public class Main {
     int m = s.nextInt();
         s.nextLine();
     char[][] str= new char[n][m];
-    int min;
+    
+    
+    
     for(int i = 0 ;  i <n ; i++)
         str[i]=s.nextLine().toCharArray();
-                
     
-                
-                
+    int min=chk(str,0,0);
+            
+    for(int i=0;i+8<n;i++)
+    {
+        for(int j =0; j+8<n;j++)
+        {
+            
+            int tmp = chk(str,i,j);
+            if(tmp<min) min = tmp;
+        }
     }
+    System.out.println(min);
+    
+}
+
+    static int chk (char[][] str,int i,int j)
+    {
+        int odd=i+j%2;   // 첫번째 배열이 홀수 인지 짝수 인지 체킹 
+        char chk = str[i][j]; 
+        int change=0;
+        for(int k = i ; k<i+8;k++)
+    {
+        for(int h=j;h<j+8;h++)
+        {
+            if( (k+h)%2 == odd && chk != str[k][h]) change++;  // 짝수일땐 짝수는 같아야됨 홀수 일댄 홀수가 같아야됨 같이 않으면 증가
+
+        }
+    }
+        return change;
+    
+    }
+
+    
 }
