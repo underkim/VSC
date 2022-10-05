@@ -11,9 +11,10 @@ import java.util.*;
 // 보드가 체스판처럼 칠해져 있다는 보장이 없어서, 지민이는 8×8 크기의 체스판으로 잘라낸 후에 몇 개의 정사각형을 다시 칠해야겠다고 생각했다. 
 // 당연히 8*8 크기는 아무데서나 골라도 된다. 
 // 지민이가 다시 칠해야 하는 정사각형의 최소 개수를 구하는 프로그램을 작성하시오.
+
 public class Main {
     
-    public static void main(){
+    public static void main(String[] args){
     Scanner s = new Scanner(System.in);
 
     int n = s.nextInt();
@@ -28,9 +29,9 @@ public class Main {
     
     int min=chk(str,0,0);
             
-    for(int i=0;i+8<n;i++)
+    for(int i=0;i+8<=n;i++)
     {
-        for(int j =0; j+8<n;j++)
+        for(int j =0; j+8<=m;j++)
         {
             
             int tmp = chk(str,i,j);
@@ -43,18 +44,23 @@ public class Main {
 
     static int chk (char[][] str,int i,int j)
     {
-        int odd=i+j%2;   // 첫번째 배열이 홀수 인지 짝수 인지 체킹 
-        char chk = str[i][j]; 
-        int change=0;
+        int odd=(i+j)%2;   // 첫번째 배열이 홀수 인지 짝수 인지 체킹 
+        
+        int B_change=0;
+        int W_change=0;
         for(int k = i ; k<i+8;k++)
     {
         for(int h=j;h<j+8;h++)
         {
-            if( (k+h)%2 == odd && chk != str[k][h]) change++;  // 짝수일땐 짝수는 같아야됨 홀수 일댄 홀수가 같아야됨 같이 않으면 증가
-
+            if( (k+h)%2 == odd && 'B' != str[k][h]) B_change++;  //B 여야 할때 
+            if( (k+h)%2 != odd && 'B' == str[k][h]) B_change++;   //W여야 할때
+            if( (k+h)%2 == odd && 'W' != str[k][h]) W_change++;  //W여야할때
+            if( (k+h)%2 != odd && 'W' == str[k][h]) W_change++; //B여야할때
+             
+            
         }
     }
-        return change;
+        return (W_change>B_change?B_change:W_change);
     
     }
 
