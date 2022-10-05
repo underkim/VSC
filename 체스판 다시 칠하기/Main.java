@@ -13,4 +13,19 @@ import java.util.*;
 // 지민이가 다시 칠해야 하는 정사각형의 최소 개수를 구하는 프로그램을 작성하시오.
 public class Main {
     
+    public static void main(){
+    Scanner s = new Scanner(System.in);
+
+    int n = s.nextInt();
+    int m = s.nextInt();
+        s.nextLine();
+    char[][] str= new char[n][m];
+    int min;
+    for(int i = 0 ;  i <n ; i++)
+        str[i]=s.nextLine().toCharArray();
+                
+    
+                
+                
+    }
 }
