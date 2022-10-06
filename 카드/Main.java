@@ -17,6 +17,16 @@ public class Main {
     
     public static void main(String [] args)
     {
-        
+        Scanner s = new Scanner(System.in);
+       
+       int n = s.nextInt();
+       int p=1;
+       while(p*2<n)
+       {
+        p*=2;
+       }
+       if(n==1) System.out.println("1");
+       else
+       System.out.println((n-p)*2);
     }
 }
