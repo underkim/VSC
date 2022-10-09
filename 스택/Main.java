@@ -1,34 +1,38 @@
 import java.util.*;
-
+import java.io.*;
 public class Main {
 
-    public static void main(String [] args)
+    public static void main(String [] args)throws IOException
     {
         Scanner scanner = new Scanner(System.in);
-
-        int n = scanner.nextInt();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int n = Integer.parseInt(br.readLine());
+        
         Stack1 st = new Stack1();
         for(int i = 0 ; i<n;i++)
         {
-            String s= scanner.next();
-            switch(s){
+            String s[]= br.readLine().split(" ");
+            switch(s[0]){
                 case "push" :
-                st.push(scanner.nextInt());
+                st.push(Integer.parseInt(s[1]));
                 break;
                 case "pop" :
-                st.pop();
+                bw.write(st.pop()+"\n");
                 break;
                 case "size":
-                st.size();
+                bw.write(st.size()+"\n");
                 break;
                 case "top":
-                st.top();
+                bw.write(st.top()+"\n");
                 break;
                 case "empty": 
-                st.empty();
+                bw.write(st.empty()?"1\n":"0\n");
                 break;
             }
+            bw.flush();
         }
+        
     }
 }
 
