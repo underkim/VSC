@@ -1,7 +1,4 @@
 import java.util.*;
-
-import javax.lang.model.util.ElementScanner14;
-
 import java.io.*;
 public class Main {
     
@@ -33,11 +30,10 @@ public class Main {
             cnt +=line[i]/mid;
         }
         mid = (start+max)/2;
+        if(n==cnt||mid == 0) {break;}
         if(n>cnt){
            max = mid;
         }
-        else if(n==cnt) {break;
-         }
         else {
             start =mid;
         }
