@@ -2,6 +2,20 @@ import java.util.*;
 import java.io.*;
 public class Main {
     
+    static long bi(long start, long end,long arr[],int n)
+    {
+        int cnt =0; //자른 개수
+            if(start>=end)return end;
+        long mid = start + (end - start)/2;
+        for(int i = 0 ; i < arr.length;i++)
+            cnt+=arr[i]/mid;
+            
+            if(cnt>=n)return bi(mid+1,end,arr,n);  //작은로 나누었을때 
+            else return bi(start,mid,arr,n); //큰로 나누었을때
+            
+        
+        }
+
     public static void main(String [] args) throws IOException
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -18,27 +32,11 @@ public class Main {
             line[i]=Integer.parseInt(br.readLine());
             if(max < line[i])max=line[i];
         }
-        long start=0;
-        int cnt ;
+        
         //이분탐색 하여 길이를 나누어 n개로 만들었을 때 경우의 수 
-         long mid=max;
-        while(true){
-           
-            cnt =0;
-        for(int i = 0; i<k;i++)
-        {
-            cnt +=line[i]/mid;
-        }
-        mid = (start+max)/2;
-        if(n==cnt||mid == 0) {break;}
-        if(n>cnt){
-           max = mid;
-        }
-        else {
-            start =mid;
-        }
-    }
-        bw.write(max + "");
+        long res = bi(0,max+1,line,n);
+
+        bw.write(res-1 + "");
         bw.flush();
     }
     
